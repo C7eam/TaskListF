@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Domain.Entities
 {
     public class Task
-    {
+    {       
         public Guid Id { get; set; }
 
         [Required, StringLength(250)]
