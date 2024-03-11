@@ -1,5 +1,6 @@
 ﻿using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TaskListF.Controllers
@@ -17,7 +18,7 @@ namespace TaskListF.Controllers
             _logger = logger;
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("/{id}"), Authorize]
         public async Task<IActionResult> GetTaskAsync(Guid id)
         {
             var task = await _mediator.Send(new GetTaskQuery(id));
