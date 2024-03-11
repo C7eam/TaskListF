@@ -25,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Новая папка\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Responses\" />
   </ItemGroup>
 
 </Project>

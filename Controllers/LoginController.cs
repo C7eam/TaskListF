@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -7,33 +8,20 @@ using TaskListF.Auth;
 
 namespace TaskListF.Controllers
 {
+    [ApiController]
+    [Route("api/auth")]
     public class LoginController : ControllerBase
     {
-        [HttpPost, Route("login")]
-        public IActionResult Login(LoginModel model)
+        private readonly IMediator _mediator;
+        public LoginController(IMediator mediator)
         {
-            if (model == null)
-            {
-                return BadRequest("Invalid client request");
-            }
-            if (model.UserName == "johndoe" && model.Password == "johndoe2410")
-            {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@2410"));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                var tokenOptions = new JwtSecurityToken(
-                    issuer: "CodeMaze",
-                    audience: "https://localhost:5001",
-                    claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: signinCredentials
-                );
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                return Ok(new { Token = tokenString });
-            }
-            else
-            {
-                return Unauthorized();
-            }
+            _mediator = mediator;
         }
+
+        [HttpPost]
+        public Task<TokenCommandResponse> Token([FromBody] TokenCommand command) =>
+        _mediator.Send(command);
+    
+    
     }
 }
