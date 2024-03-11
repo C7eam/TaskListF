@@ -1,21 +1,22 @@
-﻿using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.DTO;
 
-namespace Domain
+namespace Domain.DTO
 {
-
-    public class GetTaskQuery : IRequest<GetTaskDTO>
+    public class EditTaskDTO
     {
-        public GetTaskQuery(Guid id)
+        public EditTaskDTO(Guid id)
         {
             Id = id;
         }
-
         public Guid Id { get; set; }
+        public EditTaskDTO(Entities.Task task)
+        {
+        }
+
+
     }
 }

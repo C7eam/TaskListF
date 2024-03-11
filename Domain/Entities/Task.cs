@@ -8,7 +8,21 @@ using System.Threading.Tasks;
 namespace Domain.Entities
 {
     public class Task
-    {       
+    {
+        public Task(string taskDescription, DateTime? dateEnding)
+        {
+            TaskDescription = taskDescription;
+            DateEnding = dateEnding;
+        }
+
+        public Task(string taskDescription, DateTime dateEnding, DateTime? dateDone, bool isDone)
+        {
+            TaskDescription = taskDescription;
+            DateEnding = dateEnding;
+            DateDone = dateDone;
+            IsDone = isDone;
+        }
+
         public Guid Id { get; set; }
 
         [Required, StringLength(250)]

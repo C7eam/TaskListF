@@ -10,9 +10,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace Domain.Queries    
 {
-    public class GetTaskQueryHandler : IRequestHandler<GetTaskQuery, GetTaskDTO>
+    public class GetTaskQueryHandler : IRequestHandler<GetTaskQuery, Entities.Task>
     {
         private readonly ApplicationContext _context;
         private readonly IDistributedCache _cache;
@@ -23,7 +23,7 @@ namespace Domain
             _cache = cache;
         }
 
-        public async Task<GetTaskDTO> Handle(GetTaskQuery request, CancellationToken cancellationToken)
+        public async Task<Entities.Task> Handle(GetTaskQuery request, CancellationToken cancellationToken)
         {
             Domain.Entities.Task? task = null;
             var taskString = await _cache.GetStringAsync(request.Id.ToString(), cancellationToken);
@@ -41,7 +41,7 @@ namespace Domain
                     }, cancellationToken);
                 }
             }
-            return task.MapTo();
+            return task;
         }
     }
 }

@@ -19,6 +19,6 @@ namespace Domain.DTO
 
         public DateTime? DateDone { get; set; }
 
-        public bool? IsDone { get; set; }
+        public bool? IsDone { get; set; }      
     }
 }

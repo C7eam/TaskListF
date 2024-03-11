@@ -1,4 +1,4 @@
-﻿namespace TaskListF.Auth
+﻿namespace Domain.DTO
 {
     public class LoginDTO
     {

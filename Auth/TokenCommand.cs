@@ -1,4 +1,5 @@
 ﻿using Domain.Context;
+using Domain.DTO;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
 using ConfigurationManager = TaskListF.Auth.ConfigurationManager;
+
 namespace TaskListF.Auth
 {
     public class TokenCommand : IRequest<TokenCommandResponse>
